@@ -5,6 +5,9 @@ import { z } from "zod";
 import { articleFilterSchema, insertArticleSchema } from "@shared/schema";
 import { runScraper } from "./scrapers/index";
 import cron from "node-cron";
+import * as fs from 'fs';
+import * as path from 'path';
+import archiver from 'archiver';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize the HTTP server
@@ -114,6 +117,92 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Endpoint to download project files as a zip archive
+  app.get("/api/download-project", async (req: Request, res: Response) => {
+    try {
+      const zipFileName = 'crime-watch-news-project.zip';
+      const zipFilePath = path.resolve(process.cwd(), zipFileName);
+      
+      // Set up the response headers
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', `attachment; filename=${zipFileName}`);
+      
+      // Create a file to stream archive data to
+      const output = fs.createWriteStream(zipFilePath);
+      const archive = archiver('zip', {
+        zlib: { level: 9 } // Compression level
+      });
+      
+      // Listen for all archive data to be written
+      output.on('close', function() {
+        console.log(`Project archive created: ${archive.pointer()} total bytes`);
+        
+        // Stream the file to the client
+        const fileStream = fs.createReadStream(zipFilePath);
+        fileStream.pipe(res);
+        
+        // Clean up the zip file after it's been streamed
+        fileStream.on('end', () => {
+          fs.unlinkSync(zipFilePath);
+          console.log('Temporary zip file deleted');
+        });
+      });
+      
+      // Handle archive warnings
+      archive.on('warning', function(err) {
+        if (err.code === 'ENOENT') {
+          console.warn('Archive warning:', err);
+        } else {
+          throw err;
+        }
+      });
+      
+      // Handle archive errors
+      archive.on('error', function(err) {
+        console.error('Archive error:', err);
+        res.status(500).json({ message: 'Failed to create project archive' });
+      });
+      
+      // Pipe archive data to the output file
+      archive.pipe(output);
+      
+      // Get the root directory
+      const rootDir = process.cwd();
+      
+      // Add specific directories to the archive
+      const dirsToInclude = ['client', 'server', 'shared'];
+      dirsToInclude.forEach(dir => {
+        archive.directory(path.join(rootDir, dir), dir);
+      });
+      
+      // Add specific files to the archive
+      const filesToInclude = [
+        'package.json',
+        'tsconfig.json',
+        'vite.config.ts',
+        'tailwind.config.ts',
+        'postcss.config.js',
+        'theme.json',
+        'drizzle.config.ts',
+        'README.md'
+      ];
+      
+      filesToInclude.forEach(file => {
+        const filePath = path.join(rootDir, file);
+        if (fs.existsSync(filePath)) {
+          archive.file(filePath, { name: file });
+        }
+      });
+      
+      // Finalize the archive
+      archive.finalize();
+      
+    } catch (error) {
+      console.error('Error generating project download:', error);
+      return res.status(500).json({ message: 'Failed to generate project download' });
+    }
+  });
+
   // Schedule scraper to run every hour
   try {
     cron.schedule("0 * * * *", () => {

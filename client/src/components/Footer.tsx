@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { Download } from "lucide-react";
 
 export function Footer() {
   return (
@@ -11,7 +12,14 @@ export function Footer() {
             </p>
           </div>
           
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap space-x-6">
+            <a 
+              href="/api/download-project" 
+              className="flex items-center text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 text-sm cursor-pointer"
+              download="crime-watch-news-project.zip"
+            >
+              <Download className="h-4 w-4 mr-1" /> Download Project
+            </a>
             <div
               className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm cursor-pointer"
               onClick={() => window.location.href = '/privacy'}
