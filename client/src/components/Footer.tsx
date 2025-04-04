@@ -12,26 +12,30 @@ export function Footer() {
           </div>
           
           <div className="flex space-x-6">
-            <Link href="/privacy">
-              <a className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm">
-                Privacy Policy
-              </a>
-            </Link>
-            <Link href="/terms">
-              <a className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm">
-                Terms of Service
-              </a>
-            </Link>
-            <Link href="/about">
-              <a className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm">
-                About
-              </a>
-            </Link>
-            <Link href="/contact">
-              <a className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm">
-                Contact
-              </a>
-            </Link>
+            <div
+              className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm cursor-pointer"
+              onClick={() => window.location.href = '/privacy'}
+            >
+              Privacy Policy
+            </div>
+            <div
+              className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm cursor-pointer"
+              onClick={() => window.location.href = '/terms'}
+            >
+              Terms of Service
+            </div>
+            <div
+              className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm cursor-pointer"
+              onClick={() => window.location.href = '/about'}
+            >
+              About
+            </div>
+            <div
+              className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 text-sm cursor-pointer"
+              onClick={() => window.location.href = '/contact'}
+            >
+              Contact
+            </div>
           </div>
         </div>
       </div>

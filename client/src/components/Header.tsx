@@ -10,7 +10,7 @@ import {
   Menu, 
   X
 } from "lucide-react";
-import { useSearchTerm } from "@/hooks/useFilters";
+
 
 interface HeaderProps {
   onSearch: (term: string) => void;
@@ -66,19 +66,20 @@ export function Header({ onSearch, searchTerm = "" }: HeaderProps) {
     <header className="bg-white dark:bg-neutral-800 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
-          <Link href="/">
-            <a className="flex items-center space-x-2">
-              <div className="text-primary-800 dark:text-primary-500">
-                <Newspaper className="h-6 w-6" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-neutral-800 dark:text-white">
-                  CrimeWatch <span className="text-primary-700 dark:text-primary-500">News</span>
-                </h1>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400">Global Crime News Aggregator</p>
-              </div>
-            </a>
-          </Link>
+          <div 
+            className="flex items-center space-x-2 cursor-pointer"
+            onClick={() => navigate('/')}
+          >
+            <div className="text-primary-800 dark:text-primary-500">
+              <Newspaper className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-neutral-800 dark:text-white">
+                CrimeWatch <span className="text-primary-700 dark:text-primary-500">News</span>
+              </h1>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">Global Crime News Aggregator</p>
+            </div>
+          </div>
           
           <div className="hidden md:flex items-center space-x-4">
             <form onSubmit={handleSearch} className="relative flex items-center">
