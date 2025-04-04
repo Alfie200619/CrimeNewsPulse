@@ -31,7 +31,7 @@ export default function AboutPage() {
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <h2 className="flex items-center">Project Overview <Server className="ml-2 h-5 w-5 text-primary-500" /></h2>
             <p>
-              CrimeWatch News is a comprehensive crime news aggregation platform built as a capstone project by Chibuchi Agu and Akolo Bulus at the Nigerian University of Technology and Management (NUTM). This platform is developed to provide centralized access to crime-related news from both Nigerian and international sources, enabling users to stay informed about crime trends, analyze patterns, and understand the broader context of criminal activities.
+              CrimeWatch News is a comprehensive crime news aggregation platform built as a capstone project by Chibuchi Agu and Akolo Bulus at the Nigerian University of Technology And Management (NUTM). This platform is developed to provide centralized access to crime-related news from both Nigerian and international sources, enabling users to stay informed about crime trends, analyze patterns, and understand the broader context of criminal activities.
             </p>
             
             <h2 className="flex items-center">Technical Architecture <Code className="ml-2 h-5 w-5 text-primary-500" /></h2>
@@ -95,10 +95,10 @@ export default function AboutPage() {
             <h2 className="flex items-center mt-8">License and Attribution <ExternalLink className="ml-2 h-5 w-5 text-primary-500" /></h2>
             <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700">
               <p className="mb-4">
-                <strong>© {new Date().getFullYear()} Nigerian University of Technology and Management (NUTM)</strong>
+                <strong>© {new Date().getFullYear()} Nigerian University of Technology And Management (NUTM)</strong>
               </p>
               <p className="mb-4">
-                This project is the intellectual property of the Nigerian University of Technology and Management (NUTM). All rights reserved.
+                This project is the intellectual property of the Nigerian University of Technology And Management (NUTM). All rights reserved.
               </p>
               <p className="mb-2">
                 <strong>Developed by:</strong>
@@ -114,7 +114,7 @@ export default function AboutPage() {
             
             <div className="text-center mt-10">
               <p className="flex items-center justify-center text-lg text-neutral-600 dark:text-neutral-400">
-                Made with <Heart className="h-5 w-5 mx-1 text-danger-500" /> at Nigerian University of Technology and Management
+                Made with <Heart className="h-5 w-5 mx-1 text-danger-500" /> at Nigerian University of Technology And Management
               </p>
               <div
                 className="mt-4 inline-flex items-center text-primary-600 dark:text-primary-500 hover:underline cursor-pointer"

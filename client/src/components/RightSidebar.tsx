@@ -154,9 +154,12 @@ export function RightSidebar() {
       <div className="pb-4 mb-4 border-b border-neutral-200 dark:border-neutral-700">
         <div className="flex justify-between items-center mb-3">
           <h2 className="font-semibold text-neutral-900 dark:text-white">Top Stories</h2>
-          <Link href="/latest">
-            <a className="text-primary-600 text-sm hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300">View All</a>
-          </Link>
+          <div
+            className="text-primary-600 text-sm hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 cursor-pointer"
+            onClick={() => window.location.href = '/latest'}
+          >
+            View All
+          </div>
         </div>
         
         {articlesLoading ? (
@@ -170,11 +173,12 @@ export function RightSidebar() {
                 <div key={article.id} className="flex items-start py-2 border-b border-neutral-100 dark:border-neutral-700 last:border-b-0">
                   <div className="flex-shrink-0 w-2 h-2 rounded-full bg-danger-500 mt-2 mr-2"></div>
                   <div>
-                    <Link href={`/article/${article.id}`}>
-                      <a className="text-sm font-medium text-neutral-800 dark:text-white hover:text-primary-600 dark:hover:text-primary-400">
-                        {article.title}
-                      </a>
-                    </Link>
+                    <div
+                      className="text-sm font-medium text-neutral-800 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer"
+                      onClick={() => window.location.href = `/article/${article.id}`}
+                    >
+                      {article.title}
+                    </div>
                     <div className="flex items-center mt-1">
                       <span className="text-xs text-neutral-500 dark:text-neutral-400">{article.source.name}</span>
                       <span className="mx-1 text-neutral-300 dark:text-neutral-600">•</span>
